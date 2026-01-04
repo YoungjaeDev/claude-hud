@@ -12,6 +12,9 @@ export function renderSessionLine(ctx) {
         parts.push(cyan(`📁 ${projectName}`));
     }
     parts.push(`${cyan(`[${model}]`)} ${bar} ${getContextColor(percent)}${percent}%${RESET}`);
+    if (ctx.gitBranch) {
+        parts.push(dim(`git:${ctx.gitBranch}`));
+    }
     if (ctx.claudeMdCount > 0) {
         parts.push(dim(`${ctx.claudeMdCount} CLAUDE.md`));
     }
