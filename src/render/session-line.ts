@@ -10,14 +10,13 @@ export function renderSessionLine(ctx: RenderContext): string {
 
   const parts: string[] = [];
 
-  // Add project folder name and git branch (styled like terminal prompt)
+  parts.push(`${cyan(`[${model}]`)} ${bar} ${getContextColor(percent)}${percent}%${RESET}`);
+
   if (ctx.stdin.cwd) {
     const projectName = path.basename(ctx.stdin.cwd) || ctx.stdin.cwd;
     const branchPart = ctx.gitBranch ? ` ${cyan(`git:(${ctx.gitBranch})`)}` : '';
     parts.push(`${red(projectName)}${branchPart}`);
   }
-
-  parts.push(`${cyan(`[${model}]`)} ${bar} ${getContextColor(percent)}${percent}%${RESET}`);
 
   if (ctx.claudeMdCount > 0) {
     parts.push(dim(`${ctx.claudeMdCount} CLAUDE.md`));
